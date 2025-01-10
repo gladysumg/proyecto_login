@@ -6,16 +6,17 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #4a4a4a; /* Fondo gris */
 }
 
 .login-container {
     background: #ffffff;
-    padding: 20px;
+    padding: 20px; /* Agregamos padding para que el contenido no toque los bordes */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 300px;
+    width: 300px; /* Ajustamos el ancho para un diseño uniforme */
+    box-sizing: border-box; /* Incluye el padding dentro del ancho total */
 }
 
 .login-container h1 {
@@ -36,12 +37,13 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
+    width: calc(100% - 20px); /* Reduce el ancho para evitar que los inputs sobresalgan */
     padding: 10px;
     border: 1px solid #cccccc;
     border-radius: 5px;
     font-size: 14px;
     margin-bottom: 10px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
 }
 
 .btn-login {
@@ -52,7 +54,8 @@ input[type="password"] {
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    width: 100%;
+    width: 100%; /* Botón ocupa el ancho completo */
+    text-align: center; /* Centra el texto del botón */
 }
 
 .btn-login:hover {
