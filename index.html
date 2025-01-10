@@ -13,7 +13,8 @@
 
             // Validar credenciales
             if (usuario === "gladyschen" && contraseña === "123456") {
-                alert("Inicio de sesión exitoso. ¡Bienvenida, Gladys!");
+                // Abrir nueva pestaña con el archivo "bienvenido.html"
+                window.open("bienvenido.html", "_blank");
             } else {
                 alert("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
             }
