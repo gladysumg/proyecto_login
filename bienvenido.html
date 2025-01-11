@@ -152,29 +152,29 @@
     <ul class="menu">
         <!-- Sección A -->
         <li>
-            <a href="#">Sección A</a>
-            <ul class="submenu">
-                <li><a href="#" onclick="seleccionarCurso('Matemáticas', 'Sección A')">Matemáticas</a></li>
-                <li><a href="#" onclick="seleccionarCurso('Cálculo', 'Sección A')">Cálculo</a></li>
-                <li><a href="#" onclick="seleccionarCurso('Física', 'Sección A')">Física</a></li>
+            <a href="#" id="sectionA">Sección A</a>
+            <ul class="submenu" id="submenuA">
+                <li><a href="#" id="matematicasA" onclick="seleccionarCurso('Matemáticas', 'Sección A')">Matemáticas</a></li>
+                <li><a href="#" id="calculoA" onclick="seleccionarCurso('Cálculo', 'Sección A')">Cálculo</a></li>
+                <li><a href="#" id="fisicaA" onclick="seleccionarCurso('Física', 'Sección A')">Física</a></li>
             </ul>
         </li>
         <!-- Sección B -->
         <li>
-            <a href="#">Sección B</a>
-            <ul class="submenu">
-                <li><a href="#" onclick="seleccionarCurso('Programación 1', 'Sección B')">Programación 1</a></li>
-                <li><a href="#" onclick="seleccionarCurso('Aseguramiento de Calidad', 'Sección B')">Aseguramiento de Calidad</a></li>
-                <li><a href="#" onclick="seleccionarCurso('Base de Datos', 'Sección B')">Base de Datos</a></li>
+            <a href="#" id="sectionB">Sección B</a>
+            <ul class="submenu" id="submenuB">
+                <li><a href="#" id="progB" onclick="seleccionarCurso('Programación 1', 'Sección B')">Programación 1</a></li>
+                <li><a href="#" id="asegCalidadB" onclick="seleccionarCurso('Aseguramiento de Calidad', 'Sección B')">Aseguramiento de Calidad</a></li>
+                <li><a href="#" id="baseDatosB" onclick="seleccionarCurso('Base de Datos', 'Sección B')">Base de Datos</a></li>
             </ul>
         </li>
         <!-- Sección C -->
         <li>
-            <a href="#">Sección C</a>
-            <ul class="submenu">
-                <li><a href="#" onclick="seleccionarCurso('Derecho Informático', 'Sección C')">Derecho Informático</a></li>
-                <li><a href="#" onclick="seleccionarCurso('Proyecto de Graduación', 'Sección C')">Proyecto de Graduación</a></li>
-                <li><a href="#" onclick="seleccionarCurso('Ingeniería de Software', 'Sección C')">Ingeniería de Software</a></li>
+            <a href="#" id="sectionC">Sección C</a>
+            <ul class="submenu" id="submenuC">
+                <li><a href="#" id="derechoInfC" onclick="seleccionarCurso('Derecho Informático', 'Sección C')">Derecho Informático</a></li>
+                <li><a href="#" id="proyectoGradC" onclick="seleccionarCurso('Proyecto de Graduación', 'Sección C')">Proyecto de Graduación</a></li>
+                <li><a href="#" id="ingenieriaSoftC" onclick="seleccionarCurso('Ingeniería de Software', 'Sección C')">Ingeniería de Software</a></li>
             </ul>
         </li>
     </ul>
@@ -200,6 +200,7 @@
             listaCursos.innerHTML = ""; // Limpiar la lista
             cursosSeleccionados.forEach((item, index) => {
                 const li = document.createElement("li");
+                li.setAttribute('data-id', `${item.curso}-${item.seccion}`);
                 li.innerHTML = `<span>${item.curso} (${item.seccion})</span> <button onclick="eliminarCurso(${index})">Eliminar</button>`;
                 listaCursos.appendChild(li);
             });
