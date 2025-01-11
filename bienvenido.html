@@ -7,19 +7,208 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
         }
-        h1 {
+
+        /* Mensaje de Bienvenida */
+        .welcome {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        /* Botón de selección */
+        .button-select {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .button-select button {
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-select button:hover {
+            background-color: #1e7e34;
+        }
+
+        /* Menú principal */
+        .menu {
+            display: flex;
+            justify-content: center;
+            background-color: #000;
+            padding: 0.5rem 0;
+        }
+        .menu > li {
+            list-style: none;
+            margin: 0 1rem;
+            position: relative;
+        }
+        .menu > li > a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+        .menu > li > a:hover {
+            background-color: #444;
+        }
+
+        /* Submenús desplegables */
+        .submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 0;
+            margin: 0;
+            z-index: 1000;
+        }
+        .submenu li {
+            list-style: none;
+            margin: 0;
+        }
+        .submenu li a {
+            text-decoration: none;
             color: #333;
+            padding: 0.5rem 1rem;
+            display: block;
+            white-space: nowrap;
+        }
+        .submenu li a:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Mostrar el submenú al pasar el cursor */
+        .menu > li:hover .submenu {
+            display: block;
+        }
+
+        /* Lista de selección */
+        .list-container {
+            max-width: 600px;
+            margin: 1rem auto;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .list-container h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .list-container ul {
+            list-style: none;
+            padding: 0;
+        }
+        .list-container li {
+            padding: 0.5rem 1rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .list-container li span {
+            font-size: 1rem;
+            color: #333;
+        }
+        .list-container li button {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.9rem;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .list-container li button:hover {
+            background-color: #c82333;
         }
     </style>
 </head>
 <body>
-    <h1>Bienvenido, inicio de sesión exitoso</h1>
+    <!-- Mensaje de Bienvenida -->
+    <h1 class="welcome">Bienvenido, inicio de sesión exitoso</h1>
+
+    <!-- Botón para seleccionar curso -->
+    <div class="button-select">
+        <button onclick="mostrarSeleccion()">Seleccione el curso que desea evaluarse</button>
+    </div>
+
+    <!-- Menú Principal -->
+    <ul class="menu">
+        <!-- Sección A -->
+        <li>
+            <a href="#">Sección A</a>
+            <ul class="submenu">
+                <li><a href="#" onclick="seleccionarCurso('Matemáticas', 'Sección A')">Matemáticas</a></li>
+                <li><a href="#" onclick="seleccionarCurso('Cálculo', 'Sección A')">Cálculo</a></li>
+                <li><a href="#" onclick="seleccionarCurso('Física', 'Sección A')">Física</a></li>
+            </ul>
+        </li>
+        <!-- Sección B -->
+        <li>
+            <a href="#">Sección B</a>
+            <ul class="submenu">
+                <li><a href="#" onclick="seleccionarCurso('Programación 1', 'Sección B')">Programación 1</a></li>
+                <li><a href="#" onclick="seleccionarCurso('Aseguramiento de Calidad', 'Sección B')">Aseguramiento de Calidad</a></li>
+                <li><a href="#" onclick="seleccionarCurso('Base de Datos', 'Sección B')">Base de Datos</a></li>
+            </ul>
+        </li>
+        <!-- Sección C -->
+        <li>
+            <a href="#">Sección C</a>
+            <ul class="submenu">
+                <li><a href="#" onclick="seleccionarCurso('Derecho Informático', 'Sección C')">Derecho Informático</a></li>
+                <li><a href="#" onclick="seleccionarCurso('Proyecto de Graduación', 'Sección C')">Proyecto de Graduación</a></li>
+                <li><a href="#" onclick="seleccionarCurso('Ingeniería de Software', 'Sección C')">Ingeniería de Software</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <!-- Lista de cursos seleccionados -->
+    <div class="list-container">
+        <h2>Lista de Cursos Seleccionados</h2>
+        <ul id="listaCursos">
+            <!-- Los cursos seleccionados se agregarán aquí dinámicamente -->
+        </ul>
+    </div>
+
+    <script>
+        const cursosSeleccionados = [];
+
+        function seleccionarCurso(curso, seccion) {
+            cursosSeleccionados.push({ curso, seccion });
+            mostrarSeleccion(); // Actualizar la lista inmediatamente
+        }
+
+        function mostrarSeleccion() {
+            const listaCursos = document.getElementById("listaCursos");
+            listaCursos.innerHTML = ""; // Limpiar la lista
+            cursosSeleccionados.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `<span>${item.curso} (${item.seccion})</span> <button onclick="eliminarCurso(${index})">Eliminar</button>`;
+                listaCursos.appendChild(li);
+            });
+        }
+
+        function eliminarCurso(index) {
+            cursosSeleccionados.splice(index, 1);
+            mostrarSeleccion();
+        }
+    </script>
 </body>
 </html>

@@ -11,6 +11,20 @@
             const usuario = document.getElementById("username").value;
             const contraseña = document.getElementById("password").value;
 
+            // Validar el menú desplegable
+            const seleccion = document.getElementById("opciones").value;
+            if (seleccion === "opcionDefault") {
+                alert("Por favor, selecciona una opción válida.");
+                return;
+            }
+
+            // Validar la casilla de verificación
+            const terminosAceptados = document.getElementById("terminos").checked;
+            if (!terminosAceptados) {
+                alert("Debes aceptar los términos y condiciones.");
+                return;
+            }
+
             // Validar credenciales
             if (usuario === "gladyschen" && contraseña === "123456") {
                 // Abrir nueva pestaña con el archivo "bienvenido.html"
@@ -32,6 +46,21 @@
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+            <!-- Menú desplegable -->
+            <div class="form-group">
+                <label for="opciones">Selecciona una opción:</label>
+                <select id="opciones" name="opciones" required>
+                    <option value="opcionDefault">--Selecciona una opción--</option>
+                    <option value="opcion1">Opción 1</option>
+                    <option value="opcion2">Opción 2</option>
+                    <option value="opcion3">Opción 3</option>
+                </select>
+            </div>
+            <!-- Casilla de verificación -->
+            <div class="form-group">
+                <input type="checkbox" id="terminos" name="terminos" required>
+                <label for="terminos">Acepto los términos y condiciones</label>
             </div>
             <button type="button" class="btn-login" onclick="validarLogin()">Entrar</button>
         </form>
