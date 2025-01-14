@@ -79,6 +79,13 @@
             font-weight: normal;
         }
 
+        /* Mensajes de error */
+        #mensaje-error {
+            color: red;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
         /* Diseño responsivo */
         @media (max-width: 400px) {
             .login-container {
@@ -90,23 +97,31 @@
     <script>
         function validarLogin() {
             // Obtener los valores ingresados
-            const usuario = document.getElementById("username").value;
-            const contraseña = document.getElementById("password").value;
+            const usuario = document.getElementById("username").value.trim();
+            const contraseña = document.getElementById("password").value.trim();
+            const terminosAceptados = document.getElementById("terminos").checked;
+            const mensajeError = document.getElementById("mensaje-error");
+
+            // Limpiar mensaje previo
+            mensajeError.textContent = "";
 
             // Validar la casilla de verificación
-            const terminosAceptados = document.getElementById("terminos").checked;
             if (!terminosAceptados) {
-                alert("Debes aceptar los términos y condiciones.");
+                mensajeError.textContent = "Debes aceptar los términos y condiciones.";
                 return;
             }
 
             // Validar credenciales
             if (usuario === "gladyschen" && contraseña === "123456") {
-                // Redirigir a la página de bienvenida
                 window.location.href = "bienvenido.html";
             } else {
-                alert("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+                mensajeError.textContent = "Usuario o contraseña incorrectos. Inténtalo de nuevo.";
             }
+        }
+
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            passwordField.type = passwordField.type === "password" ? "text" : "password";
         }
     </script>
 </head>
@@ -123,6 +138,7 @@
             <div class="form-group">
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+                <input type="checkbox" id="mostrarPassword" onclick="togglePassword()"> Mostrar contraseña
             </div>
             <!-- Casilla de verificación -->
             <div class="form-group">
@@ -131,7 +147,11 @@
             </div>
             <!-- Botón de login -->
             <button type="button" class="btn-login" onclick="validarLogin()">Entrar</button>
+            <!-- Mensaje de error -->
+            <div id="mensaje-error"></div>
         </form>
+        <!-- Enlace para recuperar contraseña -->
+        <a href="recuperar.html" style="color: #6a11cb; text-decoration: none; display: block; margin-top: 1rem;">¿Olvidaste tu contraseña?</a>
     </div>
 </body>
 </html>
