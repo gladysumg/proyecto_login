@@ -22,7 +22,7 @@
         .container {
             width: 90%;
             max-width: 800px;
-            background: white;
+            background: rgb(221, 212, 245);
             color: black;
             border-radius: 10px;
             box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
@@ -36,28 +36,17 @@
             margin-bottom: 20px;
         }
 
-        /* Botones de sección */
+        /* Menú desplegable */
         .menu {
-            display: flex;
-            justify-content: space-around;
             margin-bottom: 20px;
         }
 
-        .menu button {
-            background: #6a11cb;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 15px;
+        select {
             font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease, box-shadow 0.3s ease;
-        }
-
-        .menu button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
         }
 
         /* Listado de cursos */
@@ -113,20 +102,19 @@
 <body>
     <div class="container">
         <div class="welcome">Bienvenido, selecciona tu sección</div>
-        <!-- Contenedor de cursos por sección -->
+        <!-- Menú desplegable de secciones -->
         <div class="menu">
-            <div class="courses">
-                <button onclick="mostrarCursos('A')">Sección A</button>
-                <ul id="cursosA"></ul>
-            </div>
-            <div class="courses">
-                <button onclick="mostrarCursos('B')">Sección B</button>
-                <ul id="cursosB"></ul>
-            </div>
-            <div class="courses">
-                <button onclick="mostrarCursos('C')">Sección C</button>
-                <ul id="cursosC"></ul>
-            </div>
+            <label for="secciones">Selecciona una sección:</label>
+            <select id="secciones" onchange="mostrarCursos()">
+                <option value="" disabled selected>Selecciona una sección</option>
+                <option value="A">Sección A</option>
+                <option value="B">Sección B</option>
+                <option value="C">Sección C</option>
+            </select>
+        </div>
+        <!-- Contenedor de cursos por sección -->
+        <div id="cursos" class="courses">
+            <!-- Los cursos aparecerán dinámicamente aquí -->
         </div>
         <!-- Listado de cursos seleccionados -->
         <div class="list-container">
@@ -144,15 +132,24 @@
 
         const cursosSeleccionados = JSON.parse(localStorage.getItem('cursosSeleccionados')) || [];
 
-        function mostrarCursos(seccion) {
-            const lista = document.getElementById(`cursos${seccion}`);
-            lista.innerHTML = '';
-            cursos[seccion].forEach(curso => {
-                const li = document.createElement('li');
-                li.textContent = curso;
-                li.onclick = () => seleccionarCurso(curso);
-                lista.appendChild(li);
-            });
+        function mostrarCursos() {
+            const seccionSeleccionada = document.getElementById('secciones').value;
+            const cursosDiv = document.getElementById('cursos');
+
+            // Limpiar cursos previos
+            cursosDiv.innerHTML = '';
+
+            // Mostrar los cursos de la sección seleccionada
+            if (seccionSeleccionada && cursos[seccionSeleccionada]) {
+                const ul = document.createElement('ul');
+                cursos[seccionSeleccionada].forEach(curso => {
+                    const li = document.createElement('li');
+                    li.textContent = curso;
+                    li.onclick = () => seleccionarCurso(curso);
+                    ul.appendChild(li);
+                });
+                cursosDiv.appendChild(ul);
+            }
         }
 
         function seleccionarCurso(curso) {
